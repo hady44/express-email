@@ -92,6 +92,11 @@ app.post('/api/email', (req, res) => {
     }).catch((err) => console.log(err))
 });
 
+app.post('/api/inbound', (req, res) => {
+    console.log(req.body);
+    res.render('index.js');
+});
+
 /**********
  * SERVER *
  **********/
