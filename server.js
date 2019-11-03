@@ -88,11 +88,7 @@ app.post('/api/email', (req, res) => {
     }).then(() => {
         console.log("success");
         
-        res.render('email.ejs', {
-            data: {
-                success: true
-            }
-        })
+        res.render('email.ejs')
     }).catch((err) => console.log(err))
 });
 
