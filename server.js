@@ -94,7 +94,7 @@ app.post('/api/email', (req, res) => {
 
 app.post('/api/inbound', (req, res) => {
     console.log(req.body);
-    res.render('index.js');
+    res.status(200).end();
 });
 
 /**********
