@@ -29,8 +29,15 @@
                     </div>
                 </nav>
     </div>
+    
     <div class="container" style="margin-top: 100px;">
-        <form action="/api/email" method="POST">
+        <% if(data.success){ %>
+        <div class="alert alert-success">
+                <strong>Success!</strong> Indicates a successful or positive action.
+        </div>
+        <% } %> 
+
+        <form action="/api/email/send" method="POST">
             <div class="form-group">
               <label for="exampleFormControlInput1">Email address</label>
               <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
