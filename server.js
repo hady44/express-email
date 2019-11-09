@@ -1,7 +1,19 @@
 // require express and other modules
 const express = require('express');
+const mongoose = require("mongoose");
+const helmet = require('helmet');
+const passport = require('passport');
 const app = express();
-var router = express.Router();
+
+/**
+ * Load Enviroment variables from .env file.
+ */
+
+require('dotenv')
+    .config();
+
+app.use(helmet());
+
 // Express Body Parser
 app.use(express.urlencoded({
     extended: true
@@ -18,13 +30,27 @@ app.set('view engine', 'ejs');
  * DATABASE *
  ************/
 
-const db = require('./models');
+mongoose.connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
 
-const Email = db.emails;
-
+app.use(passport.initialize());
 
 require('./routes/routes')(app);
+require('./services/config/passport')(passport);
 
+
+app.use((err, req, res, next) => {
+    res.status(500)
+      .json({
+        error: 'An error occurred with the server.',
+      });
+  });
+
+
+//TODO: split app and server.
+//TODO: switch to https.
 
 /**********
  * SERVER *
